@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * is_delimiter - determines if the current character in the buffer is a command delimiter

@@ -150,6 +150,7 @@ void free_list(list_t **head_ptr)
 	while (node)
 	{
 		list_t *next_node = node->next;
+
 		free(node->str);
 		free(node);
 		node = next_node;

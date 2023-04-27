@@ -1,79 +1,86 @@
-#include "main.h"
+#include "shell.h"
 
 /**
- * is_executable - determines if a file is an executable
+ * is_cmd - determines if a file is an executable command
+ * @info: the info struct
  * @path: path to the file
  *
- * Return: true if the file is an executable, false otherwise
+ * Return: 1 if true, 0 otherwise
  */
-bool is_executable(const char *path)
+int is_cmd(info_t *info, char *path)
 {
-    struct stat st;
-    if (stat(path, &st) == -1)
-    {
-        return false;
-    }
-    return (bool)(st.st_mode & S_IXUSR);
+	struct stat st;
+
+	(void)info;
+	if (!path || stat(path, &st))
+		return (0);
+
+	if (st.st_mode & S_IFREG)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 /**
- * extract_substring - extracts substring between start and end positions
- * @start: starting position of the substring
- * @end: ending position of the substring
- * @str: string to extract substring from
+ * dup_chars - duplicates characters
+ * @pathstr: the PATH string
+ * @start: starting index
+ * @stop: stopping index
  *
- * Return: pointer to new buffer containing the extracted substring
+ * Return: pointer to new buffer
  */
-char *extract_substring(int start, int end, const char *str)
+char *dup_chars(char *pathstr, int start, int stop)
 {
-    static char buf[1024];
-    int buf_pos = 0;
-    for (int i = start; i < end && str[i]; i++)
-    {
-        if (str[i] != ':')
-        {
-            buf[buf_pos++] = str[i];
-        }
-    }
-    buf[buf_pos] = '\0';
-    return buf;
+	static char buf[1024];
+	int i = 0, k = 0;
+
+	for (k = 0, i = start; i < stop; i++)
+		if (pathstr[i] != ':')
+			buf[k++] = pathstr[i];
+	buf[k] = 0;
+	return (buf);
 }
 
 /**
- * find_executable_path - finds the full path of an executable in PATH
- * @env: pointer to environment variables
- * @cmd: command to find
+ * find_path - finds this cmd in the PATH string
+ * @info: the info struct
+ * @pathstr: the PATH string
+ * @cmd: the cmd to find
  *
- * Return: pointer to buffer containing full path of executable, or NULL if not found
+ * Return: full path of cmd if found or NULL
  */
-char *find_executable_path(char **env, const char *cmd)
+char *find_path(info_t *info, char *pathstr, char *cmd)
 {
-    const char *path_env = getenv("PATH");
-    if (!path_env)
-    {
-        return NULL;
-    }
-    if (strstr(cmd, "./") == cmd && is_executable(cmd))
-    {
-        return strdup(cmd);
-    }
-    size_t cmd_len = strlen(cmd);
-    size_t path_env_len = strlen(path_env);
-    char *path = (char *)path_env;
-    char *full_path = NULL;
-    for (size_t i = 0; i <= path_env_len; i++)
-    {
-        if (path[i] == ':' || path[i] == '\0')
-        {
-            full_path = extract_substring(path - path_env, i - path_env, path_env);
-            strcat(full_path, "/");
-            strcat(full_path, cmd);
-            if (is_executable(full_path))
-            {
-                return full_path;
-            }
-            free(full_path);
-        }
-    }
-    return NULL;
+	int i = 0, curr_pos = 0;
+	char *path;
+
+	if (!pathstr)
+		return (NULL);
+	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
+	{
+		if (is_cmd(info, cmd))
+			return (cmd);
+	}
+	while (1)
+	{
+		if (!pathstr[i] || pathstr[i] == ':')
+		{
+			path = dup_chars(pathstr, curr_pos, i);
+			if (!*path)
+				_strcat(path, cmd);
+			else
+			{
+				_strcat(path, "/");
+				_strcat(path, cmd);
+			}
+			if (is_cmd(info, path))
+				return (path);
+			if (!pathstr[i])
+				break;
+			curr_pos = i;
+		}
+		i++;
+	}
+	return (NULL);
 }

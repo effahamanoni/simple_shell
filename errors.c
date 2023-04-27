@@ -1,7 +1,7 @@
-#include "main.h"
+#include "shell.h"
 
 /**
- * _eputs - prints an input string to stderr
+ * _eputs - prints an input string
  * @str: the string to be printed
  *
  * Return: Nothing
@@ -33,8 +33,7 @@ int _eputchar(char c)
 
 	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		if (write(2, buf, i) == -1)
-			return (-1);
+		write(2, buf, i);
 		i = 0;
 	}
 	if (c != BUF_FLUSH)
@@ -57,8 +56,7 @@ int _putfd(char c, int fd)
 
 	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		if (write(fd, buf, i) == -1)
-			return (-1);
+		write(fd, buf, i);
 		i = 0;
 	}
 	if (c != BUF_FLUSH)
@@ -67,7 +65,7 @@ int _putfd(char c, int fd)
 }
 
 /**
- * _putsfd - prints an input string to given fd
+ * _putsfd - prints an input string
  * @str: the string to be printed
  * @fd: the filedescriptor to write to
  *

@@ -1,8 +1,8 @@
 #include "shell.h"
-<<<<<<< HEAD
+< < < < < < < HEAD
 
-=======
->>>>>>> 2a53767868d608b9da4421c11edf9d0d9140a933
+= = = = = = =
+> > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
 /**
  * _strcpy - copies a string
  * @dest: the destination

@@ -37,6 +37,11 @@
 
 extern char **environ;
 
+#define HIST_FILE ".simple_shell_history"
+#define HIST_MAX 4096
+
+extern char **environ;
+
 /**
  * struct liststr - singly linked list
  * @num: the number field
@@ -99,6 +104,12 @@ typedef struct passinfo
 NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL,
     0, 0, 0
 }
+=======
+#define INFO_INIT                                                               \
+    {                                                                           \
+        NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+            0, 0, 0                                                             \
+    }
 
 /**
  * struct builtin - contains a builtin string and related function
@@ -107,9 +118,17 @@ NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL,
  */
 typedef struct builtin
 {
+
     char *type;
     int (*func)(info_t *);
 } builtin_table;
+char *type;
+int (*func)(info_t *);
+builtin_table;
+
+char *type;
+int (*func)(info_t *);
+builtin_table;
 
 /* toem_shloop.c */
 int hsh(info_t *, char **);
@@ -132,6 +151,12 @@ int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
 
 /* toem_string.c */
+int _strlen(char *);
+int _strcmp(char *, char *);
+char *starts_with(const char *, const char *);
+int str_length(const char *);
+int string_compare(const char *, const char *);
+const char *string_starts_with(const char *, const char *);
 int str_length(const char *);
 int string_compare(const char *, const char *);
 const char *string_starts_with(const char *, const char *);
@@ -161,6 +186,12 @@ void *_realloc(void *, unsigned int, unsigned int);
 int bfree(void **);
 
 /* toem_atoi.c */
+int interactive(info_t *);
+int is_delim(char, char *);
+int _isalpha(int);
+int is_interactive(info_t *);
+// int is_delimiter(char, char *);
+int is_alpha(int);
 int is_interactive(info_t *);
 // int is_delimiter(char, char *);
 int is_alpha(int);
@@ -180,6 +211,7 @@ int _myhelp(info_t *);
 
 /* toem_builtin1.c */
 int _myhistory(info_t *);
+int _myalias(info_t *);
 int unset_alias(info_t *info, char *str);
 int set_alias(info_t *info, char *str);
 int print_alias(list_t *node);
@@ -197,7 +229,10 @@ void free_info(info_t *, int);
 
 /* toem_environ.c */
 char *_getenv(info_t *, const char *);
+int _myenv(info_t *);
 int _myenv(info_t *info);
+int _myenv(info_t *info);
+
 int _mysetenv(info_t *);
 int _myunsetenv(info_t *);
 int populate_env_list(info_t *);
@@ -234,6 +269,8 @@ void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
+int is_delimiter(info_t *info, char *buf, size_t *p);
+
 int is_delimiter(info_t *info, char *buf, size_t *p);
 
 #endif

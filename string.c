@@ -6,7 +6,6 @@
  *
  * Return: integer length of string
  */
-
 int _strlen(char *s)
 {
 	int i = 0;
@@ -72,7 +71,5 @@ char *_strcat(char *dest, char *src)
 	while (*src)
 		*dest++ = *src++;
 	*dest = *src;
-	return (ret);
-	return (ret);
 	return (ret);
 }

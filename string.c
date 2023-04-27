@@ -1,9 +1,12 @@
 #include "shell.h"
 < < < < < < < HEAD
+< < < < < < < HEAD
 = = = = = = =
 /**
  *
 >>>>>>> 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 
 /**
  * _strlen - returns the length of a string
@@ -11,6 +14,7 @@
  *
  * Return: integer length of string
  */
+
 int _strlen(char *s)
 {
 	int i = 0;
@@ -72,6 +76,7 @@ char *_strcat(char *dest, char *src)
 	char *ret = dest;
 
 < < < < < < < HEAD
+< < < < < < < HEAD
 	while (*dest)
 		dest++;
 	while (*src)
@@ -81,4 +86,7 @@ char *_strcat(char *dest, char *src)
 = = = = = = =
 	return (ret);
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+= = = = = = =
+	return (ret);
+> > > > > > > f91522e65db291d96ad555709c450da64cdeff77
 }

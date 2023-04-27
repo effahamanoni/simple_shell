@@ -11,10 +11,14 @@
 #include <limits.h>
 #include <fcntl.h>
 #include <errno.h>
+<<<<<<< HEAD
 < < < < < < < HEAD
 = = = = = = =
 #include <stdbool.h>
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+#include <stdbool.h>
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 
 /* for read/write buffers */
 #define READ_BUF_SIZE 1024
@@ -22,6 +26,7 @@
 #define BUF_FLUSH -1
 
 /* for command chaining */
+<<<<<<< HEAD
 < < < < < < < HEAD
 #define CMD_NORM	0
 #define CMD_OR		1
@@ -32,6 +37,8 @@
 #define CONVERT_LOWERCASE	1
 #define CONVERT_UNSIGNED	2
 = = = = = = =
+=======
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 #define CMD_NORM 0
 #define CMD_OR 1
 #define CMD_AND 2
@@ -40,12 +47,16 @@
 /* for convert_number() */
 #define CONVERT_LOWERCASE 1
 #define CONVERT_UNSIGNED 2
+<<<<<<< HEAD
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 
 /* 1 if using system getline() */
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
+<<<<<<< HEAD
 < < < < < < < HEAD
 #define HIST_FILE	".simple_shell_history"
 #define HIST_MAX	4096
@@ -54,12 +65,17 @@ extern char **environ;
 
 
 = = = = = = =
+=======
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 #define HIST_FILE ".simple_shell_history"
 #define HIST_MAX 4096
 
 extern char **environ;
 
+<<<<<<< HEAD
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 /**
  * struct liststr - singly linked list
  * @num: the number field
@@ -68,6 +84,7 @@ extern char **environ;
  */
 typedef struct liststr
 {
+<<<<<<< HEAD
 < < < < < < < HEAD
 	int num;
 	char *str;
@@ -77,6 +94,11 @@ typedef struct liststr
 	char *str;
 	struct liststr *next;
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+    int num;
+    char *str;
+    struct liststr *next;
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 } list_t;
 
 /**
@@ -103,6 +125,7 @@ typedef struct liststr
  */
 typedef struct passinfo
 {
+<<<<<<< HEAD
 < < < < < < < HEAD
 	char *arg;
 	char **argv;
@@ -148,6 +171,27 @@ typedef struct passinfo
 	int cmd_buf_type; /* CMD_type ||, &&, ; */
 	int readfd;
 	int histcount;
+=======
+    char *arg;
+    char **argv;
+    char *path;
+    int argc;
+    unsigned int line_count;
+    int err_num;
+    int linecount_flag;
+    char *fname;
+    list_t *env;
+    list_t *history;
+    list_t *alias;
+    char **environ;
+    int env_changed;
+    int status;
+
+    char **cmd_buf;   /* pointer to cmd ; chain buffer, for memory mangement */
+    int cmd_buf_type; /* CMD_type ||, &&, ; */
+    int readfd;
+    int histcount;
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 } info_t;
 
 #define INFO_INIT                                                               \
@@ -155,7 +199,10 @@ typedef struct passinfo
 	NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
 	    0, 0, 0                                                             \
     }
+<<<<<<< HEAD
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 
 /**
  * struct builtin - contains a builtin string and related function
@@ -164,6 +211,7 @@ typedef struct passinfo
  */
 typedef struct builtin
 {
+<<<<<<< HEAD
 < < < < < < < HEAD
 	char *type;
 	int (*func)(info_t *);
@@ -176,6 +224,12 @@ typedef struct builtin
 } builtin_table;
 
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+    char *type;
+    int (*func)(info_t *);
+} builtin_table;
+
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 /* toem_shloop.c */
 int hsh(info_t *, char **);
 int find_builtin(info_t *);
@@ -197,6 +251,7 @@ int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
 
 /* toem_string.c */
+<<<<<<< HEAD
 < < < < < < < HEAD
 int _strlen(char *);
 int _strcmp(char *, char *);
@@ -206,6 +261,11 @@ int str_length(const char *);
 int string_compare(const char *, const char *);
 const char *string_starts_with(const char *, const char *);
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+int str_length(const char *);
+int string_compare(const char *, const char *);
+const char *string_starts_with(const char *, const char *);
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 char *_strcat(char *, char *);
 
 /* toem_string1.c */
@@ -232,6 +292,7 @@ void *_realloc(void *, unsigned int, unsigned int);
 int bfree(void **);
 
 /* toem_atoi.c */
+<<<<<<< HEAD
 < < < < < < < HEAD
 int interactive(info_t *);
 int is_delim(char, char *);
@@ -241,6 +302,11 @@ int is_interactive(info_t *);
 // int is_delimiter(char, char *);
 int is_alpha(int);
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+int is_interactive(info_t *);
+// int is_delimiter(char, char *);
+int is_alpha(int);
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 int _atoi(char *);
 
 /* toem_errors1.c */
@@ -257,14 +323,20 @@ int _myhelp(info_t *);
 
 /* toem_builtin1.c */
 int _myhistory(info_t *);
+<<<<<<< HEAD
 < < < < < < < HEAD
 int _myalias(info_t *);
 = = = = = = =
+=======
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 int unset_alias(info_t *info, char *str);
 int set_alias(info_t *info, char *str);
 int print_alias(list_t *node);
 int _myalias(info_t *info);
+<<<<<<< HEAD
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 
 /*toem_getline.c */
 ssize_t get_input(info_t *);
@@ -278,11 +350,15 @@ void free_info(info_t *, int);
 
 /* toem_environ.c */
 char *_getenv(info_t *, const char *);
+<<<<<<< HEAD
 < < < < < < < HEAD
 int _myenv(info_t *);
 = = = = = = =
 int _myenv(info_t *info);
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+int _myenv(info_t *info);
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 int _mysetenv(info_t *);
 int _myunsetenv(info_t *);
 int populate_env_list(info_t *);
@@ -319,9 +395,13 @@ void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
+<<<<<<< HEAD
 < < < < < < < HEAD
 = = = = = = =
 int is_delimiter(info_t *info, char *buf, size_t *p);
 > > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
+=======
+int is_delimiter(info_t *info, char *buf, size_t *p);
+>>>>>>> f91522e65db291d96ad555709c450da64cdeff77
 
 #endif

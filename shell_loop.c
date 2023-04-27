@@ -1,8 +1,5 @@
 #include "shell.h"
-<<<<<<< HEAD
 
-=======
->>>>>>> 2a53767868d608b9da4421c11edf9d0d9140a933
 /**
  * hsh - main shell loop
  * @info: the parameter & return info struct
@@ -55,6 +52,7 @@ int hsh(info_t *info, char **av)
  * 	1 if builtin found but not successful,
  * 	2 if builtin signals exit()
  */
+
 int find_builtin(info_t *info)
 {
 	int i, built_in_ret = -1;
@@ -130,7 +128,6 @@ void find_cmd(info_t *info)
  */
 void fork_cmd(info_t *info)
 {
-<<<<<<< HEAD
 	pid_t child_pid;
 
 	child_pid = fork();
@@ -161,7 +158,6 @@ void fork_cmd(info_t *info)
 				print_error(info, "Permission denied\n");
 		}
 	}
-=======
     pid_t child_pid;
 
     child_pid = fork();
@@ -171,7 +167,7 @@ void fork_cmd(info_t *info)
         perror("Error:");
         return;
     }
-    if (child_pid == 0)
+ if (child_pid == 0)
     {
         if (execve(info->path, info->argv, get_environ(info)) == -1)
         {
@@ -192,5 +188,4 @@ void fork_cmd(info_t *info)
                 print_error(info, "Permission denied\n");
         }
     }
->>>>>>> 2a53767868d608b9da4421c11edf9d0d9140a933
 }

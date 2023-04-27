@@ -1,7 +1,8 @@
 #include "shell.h"
-<<<<<<< HEAD
-=======
+< < < < < < < HEAD
+= = = = = = =
 /**
+ *
 >>>>>>> 2a53767868d608b9da4421c11edf9d0d9140a933
 
 /**
@@ -70,14 +71,14 @@ char *_strcat(char *dest, char *src)
 {
 	char *ret = dest;
 
-<<<<<<< HEAD
+< < < < < < < HEAD
 	while (*dest)
 		dest++;
 	while (*src)
 		*dest++ = *src++;
 	*dest = *src;
 	return (ret);
-=======
-        return ret;
->>>>>>> 2a53767868d608b9da4421c11edf9d0d9140a933
+= = = = = = =
+	return (ret);
+> > > > > > > 2a53767868d608b9da4421c11edf9d0d9140a933
 }
